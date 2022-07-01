@@ -1,15 +1,8 @@
-function [SelectingData] = LoadHours(FileName)
-global HourMem;
+function [HourMem] = LoadHours(FileName,StartLat,NumLat,StartLon,NumLon,StartHour,NumHour)
    %% Section 4: Cycle through the hours and load all the models for each hour and record memory use
 % We use an index named 'StartHour' in our loop
 Contents = ncinfo(FileName);
 HourMem = 0; % storage variable for the maximum memory in use by our data variable
-StartLat = 1; % starting latitude
-NumLat = 400; % number of latitude positions
-StartLon = 1; % starying longitude
-NumLon = 700; % number of lingitude positions
-StartHour = 1; % starting time for analyises
-NumHour = 1; % Number of hours of data to load
 
 % loop through the hours loading one at a time
 for StartHour = 1:25

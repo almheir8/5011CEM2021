@@ -6,10 +6,17 @@ FileName = '../Model/o3_surface_20180701000000.nc'; % define the name of the fil
 
 Contents = ncinfo(FileName); % Store the file content information in a variable.
 
-LoadAllData(FileName)
-LoadAllHours(FileName)
-LoadHours(FileName)
-ReportResults(FileName)
+StartLat = 1; % starting latitude
+NumLat = 400; % number of latitude positions
+StartLon = 1; % starying longitude
+NumLon = 700; % number of lingitude positions
+StartHour = 1; % starting time for analyses
+NumHour = 1; % Number of hours of data to load
+
+[AllDataMem] = LoadAllData(FileName); 
+[HourDataMem] = LoadAllHours(FileName,StartLat,NumLat,StartLon,NumLon,StartHour,NumHour);
+[HourMem] = LoadHours(FileName,StartLat,NumLat,StartLon,NumLon,StartHour,NumHour);
+ReportResults(AllDataMem,HourDataMem,HourMem);
 
 
 %% Section 2: Load all the model data together

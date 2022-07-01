@@ -1,8 +1,4 @@
-function [DataResult] = ReportResults(FileName)
-Contents = ncinfo(FileName);
-global AllDataMem;
-global HourDataMem;
-global HourMem;
+function [] = ReportResults(AllDataMem,HourDataMem,HourMem)
 
 
 

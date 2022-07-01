@@ -1,5 +1,4 @@
 function [AllDataMem] = LoadAllData(FileName)
-global AllDataMem;
 %% Section 2: Load all the model data together
  Contents = ncinfo(FileName); % Store the file content information in a variable.
 for idx = 1: 8

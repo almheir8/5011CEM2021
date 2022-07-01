@@ -2,7 +2,6 @@ function ParallelProcessing
 %% 1: Load Data
 
 close all
-clear all
 
 FileName = '../Model/o3_surface_20180701000000.nc';
 
@@ -11,6 +10,8 @@ Contents = ncinfo(FileName);
 Lat = ncread(FileName, 'lat');
 Lon = ncread(FileName, 'lon');
 NumHours = 2;
+
+%ProcessParameters(FileName);
 
 %% 2: Processing parameters
 % ##  provided by customer  ##
@@ -58,14 +59,8 @@ for idx1 = 1:length(Options)
                 % number of Lon, but only 1 hour.
                 % You can use these values to select a smaller sub-set of the data if
                 % required to speed up testing o fthe functionality.
-
-                DataLayer = 1;
-                for idx = [1, 2, 4, 5, 6, 7, 8]
-                    HourlyData(DataLayer,:,:) = ncread(FileName, Contents.Variables(idx).Name,...
-                        [StartLon, StartLat, idxTime], [NumLon, NumLat, 1]);
-                    DataLayer = DataLayer + 1;
-                end
-
+                [HourlyData] = LoadingHours(FileName,StartLon, StartLat,idxTime,NumLon, NumLat);
+                
                 %% 6: Pre-process the data for parallel processing
                 % This takes the 3D array of data [model, lat, lon] and generates the
                 % data required to be processed at each location.
@@ -125,7 +120,7 @@ for idx1 = 1:length(Options)
             FinalResults(idx1,idx2) = [toc];
 
          end
-    end
+end
 T2 = toc;
 delete(gcp);
 disp(Options)
