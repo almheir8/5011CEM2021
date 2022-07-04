@@ -17,16 +17,14 @@ StartLat = 1;
 StartLon = 1;
 
 for idxHour = 1:25
+    % function to load all model data
+    [Data] = LoadData(FileName,Contents,StartLat, StartLon, idxHour);
     
-    for idxModel = 1:8
-        Data(idxModel,:,:) = ncread(FileName, Contents.Variables(idxModel).Name,...
-            [StartLat, StartLon, idxHour], [inf, inf, 1]);
-    end
     
     % check for NaNs
     if any(isnan(Data), 'All')
-        fprintf('NaNs present\n')
-        NaNErrors = 1;
+        % function to trigger terminal response for NaN presence
+        [NaNErrors] = NaNFound();
     end
 end
     
@@ -53,15 +51,11 @@ StartLon = 1;
 fprintf('Testing files: %s\n', FileName)
 for idxHour = 1:25
     
-    for idxModel = 1:8
-        Data(idxModel,:,:) = ncread(FileName, Contents.Variables(idxModel).Name,...
-            [StartLat, StartLon, idxHour], [inf, inf, 1]);
-    end
-    
+    [Data] = LoadData(FileName,Contents,StartLat, StartLon, idxHour); 
+   
     % check for NaNs
     if any(isnan(Data), 'All')
-        fprintf('NaNs present during hour %i\n', idxHour)
-        NaNErrors = 1;
+        [NaNErrors] = NaNFound();
     end
 end
     

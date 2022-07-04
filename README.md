@@ -17,3 +17,12 @@ This commit is a continuation for the resit of the 2nd attempt
  an amount of segments.
 -created a function to load all model data in sequential code.
 -created a function to load all model data in parallel code.
+
+5th commit:
+-Updated comments on all files for clarity.
+-created a function to setup the file prior to testing for text
+-created a function to print the test results.
+-created a function to create an analysis log.
+-created a function to load the data for NaN tests.
+-created a function that displays a warning on the terminal whenever NaN is found.
+-
